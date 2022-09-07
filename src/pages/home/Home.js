@@ -3,6 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router-dom";
 import MovieList from "../../components/movieList/MovieList";
+import uuid from "react-uuid";
 import "./Home.css";
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to={`/movie/${movie.id}`}
+              key={uuid()}
             >
               <div className="posterImage">
                 <img

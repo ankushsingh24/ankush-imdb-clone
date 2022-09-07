@@ -132,7 +132,7 @@ const Movie = () => {
                     }
                     alt=""
                   />
-                  <span>{company.name}</span>
+                  <span key={uuid()}>{company.name}</span>
                 </span>
               )}
             </>
