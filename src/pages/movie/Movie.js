@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import uuid from "react-uuid";
+import "./Movie.css";
 
 const Movie = () => {
   const [currentMovieDetail, setMovie] = useState();
   const { id } = useParams();
+
+  useEffect(() => {
+    getData();
+    window.scrollTo(0, 0);
+  }, []);
 
   const getData = () => {
     fetch(
@@ -12,11 +19,6 @@ const Movie = () => {
       .then((res) => res.json())
       .then((data) => setMovie(data));
   };
-
-  useEffect(() => {
-    getData();
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className="movie">
@@ -29,7 +31,7 @@ const Movie = () => {
           alt=""
         />
       </div>
-      <div c>
+      <div className="movie__detail">
         <div className="movie__detailLeft">
           <div className="movie__posterBox">
             <img
@@ -37,7 +39,7 @@ const Movie = () => {
               src={`https://image.tmdb.org/t/p/original${
                 currentMovieDetail ? currentMovieDetail.poster_path : ""
               }`}
-              alt="poster"
+              alt=""
             />
           </div>
         </div>
@@ -70,7 +72,7 @@ const Movie = () => {
               {currentMovieDetail && currentMovieDetail.genres
                 ? currentMovieDetail.genres.map((genre) => (
                     <>
-                      <span className="movie__genre" id={genre.id}>
+                      <span className="movie__genre" id={genre.id} key={uuid()}>
                         {genre.name}
                       </span>
                     </>
@@ -128,7 +130,7 @@ const Movie = () => {
                     src={
                       "https://image.tmdb.org/t/p/original" + company.logo_path
                     }
-                    alt="logo"
+                    alt=""
                   />
                   <span>{company.name}</span>
                 </span>
